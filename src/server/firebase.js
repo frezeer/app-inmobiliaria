@@ -1,7 +1,8 @@
 import app from './firebase/app';
 
 const config ={
-/*configuracion de firebase borrada  */
+/*configuracion de firebase borrada aproposito  */
+
 };
 
 class Firebase {
