@@ -9,7 +9,7 @@ const FirebaseContext = React.createContext();
 
 ReactDOM.render(
   <React.StrictMode>
-  <FirebaseContext.Provider>
+  <FirebaseContext.Provider value={new Firebase()} >
       <App />
   </FirebaseContext.Provider>
   </React.StrictMode>,
