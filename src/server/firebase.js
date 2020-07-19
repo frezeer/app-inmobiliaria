@@ -5,7 +5,7 @@ import 'firebase/firestore';
 const config ={
 /*configuracion de firebase borrada aproposito  */
 /*Esto deberia subirse a github*/ 
-apiKey: "AIzaSyDDQt3pLX179ADjSwvJc93oqSjzZoCITNE",
+  apiKey: "AIzaSyDDQt3pLX179ADjSwvJc93oqSjzZoCITNE",
   authDomain: "home-66bc0.firebaseapp.com",
   databaseURL: "https://home-66bc0.firebaseio.com",
   projectId: "home-66bc0",
