@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Container, Typography, Avatar, Grid , TextField, Button } from '@material-ui/core';
 import LockoutLineIcon from '@material-ui/icons/LockOutlined';
+import { consumeFirebase } from '../../server';
 
 const style ={
     paper:{
@@ -88,4 +89,4 @@ class RegistrarUsuario extends Component {
     }
 }
 
-export default RegistrarUsuario;
+export default (consumeFirebase)(RegistrarUsuario);
