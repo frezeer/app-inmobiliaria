@@ -7,6 +7,8 @@ import theme from "./theme/theme";
 import { BrowserRouter as Router, Switch , Route } from "react-router-dom";
 import AppNavbar from "./componenentes/layout/AppNavbar";
 import RegistrarUsuario from './componenentes/seguridad/RegistrarUsuario';
+import Login from './componenentes/seguridad/Login';
+
 
 class App extends Component {
   render() {
@@ -18,7 +20,7 @@ class App extends Component {
             <Switch>
               <Route path='/' exact  component={ListaInmuebles}  />
               <Route path='/auth/registrarUsuario' exact  component={RegistrarUsuario} />
-              
+              <Route path='/auth/login' exact  component={Login} /> 
             </Switch>
           </Grid>
         </ThemeProvider>
