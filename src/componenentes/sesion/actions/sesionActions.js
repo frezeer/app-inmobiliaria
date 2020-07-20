@@ -76,6 +76,9 @@ export const crearUsuario = (dispatch, firebase , usuario) =>{
                 });
                 resolve();
             })
+            .catch(error =>{
+                console.log('error' , error)
+            })
         })
     }
 
