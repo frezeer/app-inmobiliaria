@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Container, Typography, Avatar, Grid , TextField, Button } from '@material-ui/core';
 import LockoutLineIcon from '@material-ui/icons/LockOutlined';
 import { consumerFirebase } from '../../server';
-//import { auth } from 'firebase';
+
 
 const style ={
     paper:{
