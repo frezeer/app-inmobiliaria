@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Container, Typography, Avatar, Grid , TextField, Button } from '@material-ui/core';
 import LockoutLineIcon from '@material-ui/icons/LockOutlined';
 import { consumerFirebase } from '../../server';
+//import { auth } from 'firebase';
 
 const style ={
     paper:{
@@ -63,12 +64,25 @@ class RegistrarUsuario extends Component {
     }
 
     registrarUsuario = e => {
+
         e.preventDefault();
         console.log('imprimir objeto usuario del state ' , this.state.usuario);
         const { usuario , firebase } = this.state;
+
+        firebase.auth
+        .createUserWithEmailAndPassword(usuario.email, usuario.password)
+        .then(auth =>{
+        
+        const usuarioDB = {
+            usuarioid : auth.user.uid,
+            email: usuario.email,
+            nombre :usuario.nombre,
+            apellido: usuario.apellido
+        };
+
         firebase.db
         .collection("Users")
-        .add(usuario)
+        .add(usuarioDB)
         .then(usuarioAfter=>{
             console.log('Esta inserccion fue un exito',usuarioAfter);
             this.setState({
@@ -78,6 +92,11 @@ class RegistrarUsuario extends Component {
         .catch(error =>{
             console.log('error',error);
         });
+
+       })
+       .catch(error =>{
+           console.log('error',error);
+       })
     }
 
     render() {
