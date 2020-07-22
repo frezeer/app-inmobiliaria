@@ -5,26 +5,22 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import Firebase, { FirebaseContext } from './server';
 
+import { initialState } from './sesion/initialState';
+import { StateProvider } from './sesion/store';
+import  sesionReducer  from './sesion/reducers/sesionReducer';
 
-
-//import { initialState } from './componenentes/sesion/initialState';
-//import { StateProvider } from './componenentes/sesion/store';
-//import { sesionReducer } from './componenentes/sesion/reducers/sesionReducer';
-
+import {mainReducer} from './sesion/reducers';
 
 
 //const FirebaseContext = React.createContext();
-//<StateProvider initialState={initialState} reducer={sesionReducer} >
 //</StateProvider>
 
 ReactDOM.render(
   <React.StrictMode>
   <FirebaseContext.Provider value={new Firebase()} >
-      
-      
+     <StateProvider initialState={initialState} reducer={mainReducer} >
             <App />
-      
-
+    </StateProvider>
   </FirebaseContext.Provider>
   </React.StrictMode>,
   document.getElementById('root')

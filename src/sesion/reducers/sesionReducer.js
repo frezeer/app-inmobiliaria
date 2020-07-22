@@ -1,6 +1,19 @@
+export const initialState ={
+    usuario:{
+        nombre: "",
+        password:"",
+        appellido:"",
+        email:"",
+        telefono:"",
+        id:"",
+        foto:""
+        //nuevoUsuario:""
+    },
+    autenticado: false
+    //nuevoUsuario: ""
+}
 
-
-const sesionReducer = (state, action) => {
+const sesionReducer = (state = initialState, action) => {
 
     switch(action.type){
         case "INICIAR_SESSION":
@@ -25,6 +38,4 @@ const sesionReducer = (state, action) => {
             return state;
     }
 };
-
-
 export default sesionReducer;
