@@ -7,10 +7,10 @@ export const initialState ={
         telefono:"",
         id:"",
         foto:""
-        //nuevoUsuario:""
+        
     },
     autenticado: false
-    //nuevoUsuario: ""
+    
 }
 
 const sesionReducer = (state = initialState, action) => {
@@ -25,7 +25,7 @@ const sesionReducer = (state = initialState, action) => {
         case "CAMBIAR_SESSION":
             return {
                 ...state,
-                usuario : nuevoUsuario,
+                usuario : action.nuevoUsuario,
                 autenticado : action.autenticado    
             };
         case "SALIR_SESSION":

@@ -7,7 +7,7 @@ import Firebase, { FirebaseContext } from './server';
 
 import { initialState } from './sesion/initialState';
 import { StateProvider } from './sesion/store';
-import  sesionReducer  from './sesion/reducers/sesionReducer';
+//import  sesionReducer  from './sesion/reducers/sesionReducer';
 
 import {mainReducer} from './sesion/reducers';
 
