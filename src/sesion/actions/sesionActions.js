@@ -1,9 +1,6 @@
 
-export const iniciarSesion = (dispatch ,firebase, email , password) =>
-{
-    
+export const iniciarSesion = (dispatch ,firebase, email , password) =>{
     return new Promise((resolve, eject) => {
-       
         firebase.auth
         .signInwithEmailAndPassord(email,password)
         .then(auth => {
@@ -19,11 +16,12 @@ export const iniciarSesion = (dispatch ,firebase, email , password) =>
                     session: usuarioDB,
                     autenticado:true
                 })
-                resolve();
+                resolve({status: true});
             })
         })
         .catch(error =>{
                 console.log('error' , error)
+                resolve({status :false , mensaje: error})
         });
     });
 };
@@ -36,12 +34,12 @@ export const crearUsuario = (dispatch, firebase , usuario) =>{
                 firebase.db
                 .colections("Users")
                 .doc(auth.user.uid)
-                set({
+                .set({
                     id: auth.user.uid,
                     email : usuario.email,
                     nombre : usuario.nombre,
                     apellido: usuario.apellido
-                },merge : true
+                },{merge: true}
                 ).then(doc =>   {
                     usuario.uid = auth.usuario.uid;
                     dispatch({
@@ -49,17 +47,18 @@ export const crearUsuario = (dispatch, firebase , usuario) =>{
                         session: usuario,
                         autenticado: true
                     })
-                    resolve();
+                    resolve({status :true});
                 })
             })
             .catch(error =>{
                 console.log('error', error);
+                 resolve({status :false , mensaje: error})
             })
         })
     };
 
 
-    export const salirSesion(dispatch, firebase) =>{
+    export const salirSesion = (dispatch, firebase) =>{
         return new Promise((resolve, eject) =>{
             firebase.auth.signOut().then(salir =>{
                 dispatch({
@@ -74,10 +73,11 @@ export const crearUsuario = (dispatch, firebase , usuario) =>{
                     },
                     autenticado:false
                 });
-                resolve();
+                resolve({status : true});
             })
             .catch(error =>{
                 console.log('error' , error)
+                 resolve({status :false , mensaje: error})
             })
         })
     }

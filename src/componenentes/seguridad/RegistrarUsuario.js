@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import { Container, Typography, Avatar, Grid , TextField, Button } from '@material-ui/core';
 import LockoutLineIcon from '@material-ui/icons/LockOutlined';
 import { consumerFirebase } from '../../server';
+import { crearUsuario } from '../../sesion/actions/sesionActions';
+import { openMensajePantalla } from '../../sesion/actions/snackbarActions';
+import {  StateContex } from '../../sesion/store';
 
 
 const style ={
@@ -35,6 +38,8 @@ const usuarioInicial  = {
 
 
 class RegistrarUsuario extends Component {
+    static contextType = StateContex;
+
     state = {
        firebase: null,
        usuario: {
@@ -63,40 +68,22 @@ class RegistrarUsuario extends Component {
         })
     }
 
-    registrarUsuario = e => {
-
-        e.preventDefault();
-        console.log('imprimir objeto usuario del state ' , this.state.usuario);
-        const { usuario , firebase } = this.state;
-
-        firebase.auth
-        .createUserWithEmailAndPassword(usuario.email, usuario.password)
-        .then(auth =>{
-        
-        const usuarioDB = {
-            usuarioid : auth.user.uid,
-            email: usuario.email,
-            nombre :usuario.nombre,
-            apellido: usuario.apellido
-        };
-
-        firebase.db
-        .collection("Users")
-        .add(usuarioDB)
-        .then(usuarioAfter=>{
-            console.log('Esta inserccion fue un exito',usuarioAfter);
-            this.setState({
-                usuario : usuarioInicial
+    
+    registrarUsuario = async e => {
+       e.preventDefault();
+        const [ {sesion}, dispatch ]   = this.context;
+        const {  firebase, usuario  }  = this.state;
+        const { email, password } = usuario
+        let callback = await crearUsuario(dispatch, firebase, email , password);
+        if(callback.status){
+            this.props.history.push("/")
+        }else{
+            openMensajePantalla(dispatch ,
+            {
+                open: true,
+                mensaje: callback.mensaje.message
             })
-        })
-        .catch(error =>{
-            console.log('error',error);
-        });
-
-       })
-       .catch(error =>{
-           console.log('error',error);
-       })
+          }
     }
 
     render() {

@@ -3,7 +3,9 @@ import {  Container , Avatar , Typography, TextField, Button } from '@material-u
 import LockoutLineIcon from '@material-ui/icons/LockOutlined';
 //import compose from 'recompose';
 import { consumerFirebase } from '../../server';
-
+import { iniciarSesion } from '../../sesion/actions/sesionActions';
+import { StateContex } from '../../sesion/store';
+import { openMensajePantalla } from '../../sesion/actions/snackbarActions';
 
 const style ={
     paper :{
@@ -23,6 +25,7 @@ const style ={
 }
 
 class Login extends Component {
+    static contexType = StateContex;
 
     state ={
         firebase: null,
@@ -31,7 +34,6 @@ class Login extends Component {
              password:''
          }   
     }
-
     static getDerivedStateFromProps(nextProps, prevState){
         if(nextProps.firebase === prevState.firebase ){
             return null;
@@ -49,23 +51,25 @@ class Login extends Component {
         })
     }
 
-    login = e =>
-    {
-        e.preventDefault();
-        
-        const {firebase, usuario} = this.state;
-        firebase.auth
-        .signInWithEmailAndPassword(usuario.email, usuario.password)
-        .then(auth =>
-        {
-            this.props.history.push('/'); //me lleva ala lista de inmuebles si la uthentication es correcat
-        })
-        .catch(error =>
-        {
-                console.log('error', error)
-        })
-    }
 
+    login = async e => {
+        e.preventDefault();
+        const [ {sesion}, dispatch ]   = this.context;
+        const {  firebase, usuario  }  = this.state;
+        const { email, password } = usuario
+        let callback = await iniciarSesion(dispatch, firebase, email , password);
+       
+        if(callback.status){
+            this.props.history.push("/")
+        }else{
+            openMensajePantalla(dispatch ,
+            {
+                open: true,
+                mensaje: callback.mensaje.message
+            })
+          }
+        }
+    
     render() {
         return (
             <Container maxWidth="xs" >
