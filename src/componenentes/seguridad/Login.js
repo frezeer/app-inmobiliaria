@@ -52,11 +52,11 @@ class Login extends Component {
     }
 
 
-    login = async e => {
+        login = async e => {
         e.preventDefault();
-        const [ {sesion}, dispatch ]   = this.context;
-        const {  firebase, usuario  }  = this.state;
-        const { email, password } = usuario
+        const [{sesion}, dispatch ] = this.context;
+        const {firebase, usuario}  = this.state;
+        const {email, password} = usuario;
         let callback = await iniciarSesion(dispatch, firebase, email , password);
        
         if(callback.status){

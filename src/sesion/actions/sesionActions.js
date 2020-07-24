@@ -1,7 +1,7 @@
 
 export const iniciarSesion = (dispatch ,firebase, email , password) =>{
     return new Promise((resolve, eject) => {
-        firebase.auth
+        firebase.auth()
         .signInwithEmailAndPassord(email,password)
         .then(auth => {
             //auth.user.uid
@@ -28,8 +28,8 @@ export const iniciarSesion = (dispatch ,firebase, email , password) =>{
 
 export const crearUsuario = (dispatch, firebase , usuario) =>{
     return new Promise((resolve, eject)=>{
-            firebase.auth
-            .createUserAndPassword(usuario.email,usuario.password)
+            firebase.auth()
+            .createUserWithEmailAndPassword(usuario.email, usuario.password)
             .then(auth =>{
                 firebase.db
                 .colections("Users")
