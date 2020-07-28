@@ -74,7 +74,7 @@ class RegistrarUsuario extends Component {
        e.preventDefault();
         const [ {sesion}, dispatch ]   = this.context;
         const {  firebase, usuario  }  = this.state;
-        const { email, password } = usuario
+        //const { email, password } = usuario
         let callback = await crearUsuario(dispatch, firebase, usuario);
         if(callback.status){
             this.props.history.push("/")
