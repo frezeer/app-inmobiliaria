@@ -25,7 +25,7 @@ const style ={
 }
 
 class Login extends Component {
-    static contexType = StateContex;
+    static contextType = StateContex;
 
     state ={
         firebase: null,

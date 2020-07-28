@@ -75,7 +75,7 @@ class RegistrarUsuario extends Component {
         const [ {sesion}, dispatch ]   = this.context;
         const {  firebase, usuario  }  = this.state;
         const { email, password } = usuario
-        let callback = await crearUsuario(dispatch, firebase, email, password);
+        let callback = await crearUsuario(dispatch, firebase, usuario);
         if(callback.status){
             this.props.history.push("/")
         }else{
