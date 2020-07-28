@@ -3,6 +3,6 @@
 export const openMensajePantalla = (dispatch, openMensaje) => {
     dispatch({
         type: "OPEN_SNACKBAR",
-        open : openMensaje
+        openMensaje : openMensaje
     })
 }
