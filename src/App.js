@@ -1,5 +1,4 @@
-//import React, { Component } from "react";
-import React, { useEffect } from "react";
+import React, {  useEffect } from "react";
 import "./App.css";
 import Grid from "@material-ui/core/Grid";
 import ListaInmuebles from "./componenentes/vistas/ListaInmuebles";
@@ -11,7 +10,9 @@ import RegistrarUsuario from "./componenentes/seguridad/RegistrarUsuario";
 import Login from "./componenentes/seguridad/Login";
 import { FirebaseContext } from "./server";
 import { useStateValue } from "./sesion/store";
-//import openSnackbarReducer from "./sesion/reducers/openSnackbarReducer";
+import RutaAutenticada from './componenentes/seguridad/RutaAutenticada';
+import PerfilUsuario from "./componenentes/seguridad/perfilUsuario";
+
 
 function App(props) {
   let firebase = React.useContext(FirebaseContext);
@@ -54,7 +55,12 @@ function App(props) {
           <AppNavbar />
           <Grid container>
             <Switch>
-              <Route path="/" exact component={ListaInmuebles} />
+            <RutaAutenticada
+            exact  
+            path="/" 
+            autenticadoFirebase={firebase.auth.currentUser} 
+            component={PerfilUsuario} 
+            />
               <Route
                 path="/auth/registrarUsuario"
                 exact

@@ -4,7 +4,7 @@ import LockoutLineIcon from '@material-ui/icons/LockOutlined';
 import { consumerFirebase } from '../../server';
 import { crearUsuario } from '../../sesion/actions/sesionActions';
 import { openMensajePantalla } from '../../sesion/actions/snackbarActions';
-import { StateContex } from '../../sesion/store';
+import { StateContext } from '../../sesion/store';
 
 
 const style ={
@@ -29,17 +29,17 @@ const style ={
     }
 }
 
-const usuarioInicial  = 
-{
-           nombre: '',
-           apellido :'',
-           email : '',
-           password: ''
-}
+// const usuarioInicial  = 
+// {
+//            nombre: '',
+//            apellido :'',
+//            email : '',
+//            password: ''
+// }
 
 
 class RegistrarUsuario extends Component {
-    static contextType = StateContex;
+    static contextType = StateContext;
 
     state = {
        firebase: null,
@@ -72,7 +72,7 @@ class RegistrarUsuario extends Component {
     
     registrarUsuario = async e => {
        e.preventDefault();
-        const [ {sesion}, dispatch ]   = this.context;
+        const [{ sesion } ,  dispatch] = this.context;
         const {  firebase, usuario  }  = this.state;
         //const { email, password } = usuario
         let callback = await crearUsuario(dispatch, firebase, usuario);

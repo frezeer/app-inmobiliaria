@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import {  Container , Avatar , Typography, TextField, Button } from '@material-ui/core';
 import LockoutLineIcon from '@material-ui/icons/LockOutlined';
-//import compose from 'recompose';
+import { compose } from 'recompose';
 import { consumerFirebase } from '../../server';
 import { iniciarSesion } from '../../sesion/actions/sesionActions';
-import { StateContex } from '../../sesion/store';
+import { StateContext } from '../../sesion/store';
 import { openMensajePantalla } from '../../sesion/actions/snackbarActions';
 
 const style ={
@@ -26,7 +26,7 @@ const style ={
 
 class Login extends Component {
     
-    static contextType = StateContex;
+    static contextType = StateContext;
 
     state ={
         firebase: null,
@@ -61,6 +61,7 @@ class Login extends Component {
         let callback = await iniciarSesion(dispatch, firebase, email , password);
        
         if(callback.status){
+            console.log(callback.status);
             this.props.history.push("/")
         }else{
             openMensajePantalla(dispatch ,
@@ -116,4 +117,4 @@ class Login extends Component {
     }
 }
 
-export default (consumerFirebase)(Login);
+export default compose(consumerFirebase)(Login);
